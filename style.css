@@ -2,12 +2,18 @@ body{
     width: 100vw;
     height: 100vh;
     display: grid;
-    grid-template-columns: repeat(100, .1fr) ;
-    grid-template-rows: repeat(100, .1fr) ;
+    /*grid-template-columns: repeat(100, .1fr) ;*/
+    /*grid-template-rows: repeat(100, .1fr) ;*/
 }
 
 .block-item{
     /*width: 10px;*/
     /*height: 10px;*/
     border: 0.1px solid black;
+}
+
+#board{
+    width: 500px;
+    height: 500px;
+    display: grid;
 }

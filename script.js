@@ -15,45 +15,80 @@
 //
 // document.body.append(div)
 
-const placeBlocks = document.querySelector('.wrapper')
+const board = document.querySelector('#board')
 
-const blocks = 5000
-let widthOneBlock =  placeBlocks.clientWidth
-let heightOneBlock = placeBlocks.clientHeight
+const blocks = 1500
+let widthBoard =  board.clientWidth
+let heightBoard = board.clientHeight
 
-function getWidth(b){
+function createBoard(countElW, countElH){
 
-    let i = 1
+    // let i = 1
+    // let btn = document.querySelector('.button')
+    // let btnColor = document.querySelector('.button-color')
+    // let btnBlack = document.querySelector('.button-black')
+
+    // while(i < b){
+    //     let div = document.createElement('div')
+    //     div.className = 'block-item'
+    //     div.style.width = `${widthOneBlock}px`
+    //     div.style.height = `${heightOneBlock}px`
+    //     div.addEventListener('mouseover', ()=>{
+    //         div.style.backgroundColor = "black"
+    //     })
+    //     document.body.prepend(div)
+    //     i++
+    //     btn.addEventListener('click', ()=>{
+    //         div.style.backgroundColor = 'white'
+    //     })
+    //     btnColor.addEventListener('click', ()=>{
+    //         div.addEventListener('mouseover', ()=>{
+    //             div.style.backgroundColor = "blue"
+    //         })
+    //     })
+    //     btnBlack.addEventListener('click', ()=>{
+    //         div.addEventListener('mouseover', ()=>{
+    //             div.style.backgroundColor = "black"
+    //         })
+    //     })
+    // }
+
+    const itemWidth = widthBoard / countElW
+    board.style.gridTemplateColumns = `repeat(${countElW}, ${itemWidth}px)`
+    const itemHeight = heightBoard / countElH
+    board.style.gridTemplateRows = `repeat(${countElH}, ${itemHeight}px)`
+    let i = 0
     let btn = document.querySelector('.button')
     let btnColor = document.querySelector('.button-color')
     let btnBlack = document.querySelector('.button-black')
-
-    while(i < b){
+    while(i < countElW*countElH ){
         let div = document.createElement('div')
+        div.setAttribute('data-number', i)
         div.className = 'block-item'
-        div.style.width = String(widthOneBlock / b)
-        div.style.height = String(heightOneBlock / b)
-        div.addEventListener('mouseover', ()=>{
-            div.style.backgroundColor = "black"
-        })
-        document.body.prepend(div)
+        div.style.width = `${itemWidth}px`
+        div.style.height = `${itemHeight}px`
+        board.insertAdjacentElement('afterbegin', div)
+
+
         i++
-        btn.addEventListener('click', ()=>{
-            div.style.backgroundColor = 'white'
-        })
-        btnColor.addEventListener('click', ()=>{
-            div.addEventListener('mouseover', ()=>{
-                div.style.backgroundColor = "blue"
-            })
-        })
-        btnBlack.addEventListener('click', ()=>{
-            div.addEventListener('mouseover', ()=>{
-                div.style.backgroundColor = "black"
-            })
-        })
     }
+    let q= false
+    board.addEventListener('mouseover', (event)=>{
+        if(q ){
+            event.target.style.backgroundColor = "red"
+
+        }
+    })
+    board.addEventListener('mousedown', (event)=>{
+        q = true
+
+    })
+
+    board.addEventListener('mouseup', (event)=>{
+        q = false
+    })
+
 }
 
-// Создать вторую функцию, где расписать сорздание блока со стилями. В этой же функции сделать цикл while, который будет их создавать
+createBoard(50,50)
 
-getWidth(blocks)
